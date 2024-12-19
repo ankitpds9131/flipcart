@@ -122,6 +122,7 @@ public class ProductService {
 	public Map<String, List<ProductDto>> fetchAllProducts() {
 		List<ProductEntity> entities = repository.findAll();
 		List<ProductDto> dtos = mapper.convertToDto(entities);
+		dtos.forEach(x->x.setBrand(x.getBrand().toUpperCase()));
 		Map<String, List<ProductDto>> productsMap = dtos.stream().collect(Collectors.groupingBy(ProductDto::getColor));
 		return productsMap;
 		
